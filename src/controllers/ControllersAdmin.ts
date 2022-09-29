@@ -29,10 +29,7 @@ class ControllersAdmin {
         connectDb.query( "SELECT documento FROM admin WHERE correo = ? "[correo], ( rows, error ) => {
             
             console.log(rows);
-            
-                
-                    
-                
+    
             
         })
     }
