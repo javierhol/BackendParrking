@@ -37,20 +37,37 @@ class ControllersAdmin {
                     let sessions;
                     sessions = req?.session!
                     sessions.idUser = rows[0].idAdmin;
-                    console.log(sessions);
                   return   res.send("Autenticado");
                     
                 }else{
                   return res.send("no autenticado");
                     
                 }
-              
-    
-                  return res.send("LOGIN");
                 }
         })
     }
-
+public async parkingPost( req: Request, res: Response ): Promise<any> {
+        const connectDb = await conexion.connect();
+        connectDb.query("SELECT  documento, idAdmin FROM admin WHERE documento = ? ",
+        [req.body.documento], async (error, rows) => {
+              
+              if (rows ) {
+                const passDocument = await rows[0].documento; 
+                
+                if (passDocument == req.body.documento) {
+                  
+                    let sessions;
+                    sessions = req?.session!
+                    sessions.idUser = rows[0].idAdmin;
+                  return   res.send("Autenticado");
+                    
+                }else{
+                  return res.send("no autenticado");
+                    
+                }
+                }
+        })
+    }
 }
 
 export const controllersAdmin = new ControllersAdmin();

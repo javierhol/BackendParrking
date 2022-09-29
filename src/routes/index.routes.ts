@@ -16,6 +16,12 @@ router.route("/:userId").get(getUser);
 //rutas admin
 
 router.post("/adminpost",controllersAdmin.Signup)
-router.post("/login",controllersAdmin.signup)
+router.post( "/login", controllersAdmin.signup )
+// Estacionamiento
+router.get("/parkingLot")
+router.post("/parkingLot")
+router.delete("/parkingLot")
+router.put("/parkingLot")
+router.get("/parkingLot/:id")
 
 export default router;
