@@ -1,4 +1,4 @@
-import {createPool} from "mysql2/promise";
+import {createPool} from "mysql";
 class Conexion {
   async  connect() {
    const connection = await createPool({
