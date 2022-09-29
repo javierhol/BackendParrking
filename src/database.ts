@@ -5,7 +5,7 @@ class Conexion {
      host: "localhost",
      user: "root",
      port: 3306,
-     database: "Parking",
+     database: "parking",
    });
    return connection;
 }
