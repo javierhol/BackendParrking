@@ -1,39 +1,42 @@
-  
 
   export interface Admin{
-    idAdmin: number;
-    nombre: string;
-    documento: number;
-    telefono: number;
-    correo:string;
+    idAdmin: Number;
+    nombre: String;
+    documento: Number;
+    telefono: Number;
+    correo:String;
   }
 
   export interface Users{
-    idUser: number;
-    nombre: string; 
-    telefono: number;
-    horaEntrada: string;
-    horaSalida: string;
+    idUser?: Number;
+    idAmin1?: Number;
+    nombre?: String; 
+    telefono?: Number;
+    hora_llegada?: String;
+    hora_salida?: String;
   }
 
   export interface estacionamiento {
-    idEstacio: number;
-    idVehi: number;
-    idUser: number;
-    horaEntrada: string;
-    horaSalida: string;
-    numeroAsignado: number;
+    idEstacio?: Number;
+    idVehi?: Number;
+    idUser?: Number;
+    horaEntrada?: String;
+    horaSalida?: String;
+    numeroAsignado?: Number;
 
   }
 
   export interface vehiculo{
-    idVehi: number;
-    idEstacio1: number;
-    placa:number;
-    tipoVehiculo: string;
+    idVehi?: Number;
+    idEstacio1?: Number;
+    placa?:Number;
+    tipoVehiculo?: String;
   }
 
   export interface tipoVehiculo{
-    
+    idVehi?: Number;
+    idEstacio2?: Number;
+    descripcion?:String;
+    valor?: Number;
 
   }

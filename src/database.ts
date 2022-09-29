@@ -1,13 +1,14 @@
-import {createPool} from "mysql2/promise";
-
-export async function connect() {
-  const connection = await createPool({
-    host: "localhost",
-    user: "root",
-    port: 3306,
-    database: "Parking",
-  });
-  return connection;
-
+import {createPool} from "mysql";
+class Conexion {
+  async  connect() {
+   const connection = await createPool({
+     host: "localhost",
+     user: "root",
+     port: 3306,
+     database: "parking",
+   });
+   return connection;
 }
+}
+export const  conexion = new  Conexion();
   

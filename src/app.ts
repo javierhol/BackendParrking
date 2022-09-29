@@ -2,8 +2,10 @@ import express,{Application} from 'express';
 import morgan from 'morgan';
 import indexRoutes from './routes/index.routes';
 
+
 export class App {
- private app: Application;
+  
+ public app: Application = express();
   constructor(private port?: number | string){
     this.app = express();
     this.settings();
@@ -18,12 +20,13 @@ export class App {
   middewares(){
     this.app.use(morgan('dev'));
   }
+
   routes(){
     this.app.use(indexRoutes);
   }
 
   async listen(){
-    await this.app.listen(this.app.get('port'));
+  this.app.listen(this.app.get('port'));
     console.log('server listening on port', this.app.get('port')); 
   }
 
