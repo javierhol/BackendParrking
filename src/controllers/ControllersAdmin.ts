@@ -2,8 +2,11 @@ import { Request, Response } from "express"
 import { conexion } from "../database"
 import { Admin } from "../interface/user.interface"
 import {AdminData} from "../class/AdminUser"
+import session, { Session } from "express-session";
 class ControllersAdmin {
     public async Signup( req: Request, res: Response ): Promise<any>{
+        
+        
         try {
             const { id, nombre, documento, telefono, correo } = req.body;
             console.log( req.body );
@@ -22,21 +25,25 @@ class ControllersAdmin {
     }
 
     public async signup( req: Request, res: Response ): Promise<any> {
-        const { documento } = req.body;
         const connectDb = await conexion.connect();
         connectDb.query("SELECT  documento, idAdmin FROM admin WHERE documento = ? ",
-        [documento], async (error, rows) => {
+        [req.body.documento], async (error, rows) => {
               
               if (rows ) {
                 const passDocument = await rows[0].documento; 
                 
-                if (passDocument == documento) {
+                if (passDocument == req.body.documento) {
                   
-                    res.send("Autenticado");
+                    let sessions;
+                    sessions = req?.session!
+                    sessions.idUser = rows[0].idAdmin;
+                    console.log(sessions);
+                    
+                  return   res.send("Autenticado");
                     
                     
                 }else{
-                   res.send("no autenticado");
+                  return res.send("no autenticado");
                     
                 }
               

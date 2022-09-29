@@ -11,19 +11,18 @@ async function Server() {
     
     try {
         const appServer: express.Application = express();
-    appServer?.use( cors( {
-        
-    }))
     const timeEXp = 1000 * 60 * 60 * 24;
-appServer.use(
-  sessions({
-    secret: "rfghf66a76ythggi87au7td",
-    saveUninitialized: true,
-    cookie: { maxAge: timeEXp },
-    resave: false,
-  })
-);
-     appServer?.use(cookieParser());
+    appServer.use(
+      sessions({
+        secret: "rfghf66a76ythggi87au7td",
+        saveUninitialized: true,
+        cookie: { maxAge: timeEXp },
+        resave: false,
+      })
+    );
+    
+    appServer?.use(cors());
+    appServer?.use(cookieParser());
     appServer?.set( "views", path.join( __dirname, "views" ))
     appServer?.use(express.json() )
     appServer?.use(express.urlencoded({ extended: true }))
