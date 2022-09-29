@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import indexRoutes from './routes/index.routes';
 
 export class App {
+  
  private app: Application;
   constructor(private port?: number | string){
     this.app = express();

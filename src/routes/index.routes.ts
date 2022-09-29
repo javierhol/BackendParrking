@@ -7,7 +7,7 @@ const router = Router();
 
 router.route('/') 
   .get (welcome);
-router.route('/user/').get (getUser);
+router.route('/user').get (getUser);
 
 
 export default router;
