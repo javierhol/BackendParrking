@@ -7,13 +7,14 @@ const router:Router = Router();
 
 router.route('/') 
   .get (welcome);
-router.route('/user').get (getUsers);
+router.route('/users').get(getUsers);
 
 //rutas Users
 router.route("/createUser").post(createUser);
 router.route("/:userId").get(getUser);
 
 //rutas admin
+
 router.post("/adminpost",controllersAdmin.Signup)
 router.post("/login",controllersAdmin.signup)
 
