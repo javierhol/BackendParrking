@@ -1,11 +1,11 @@
-import express,{json, Request, Response, }  from "express"
+import express,{ Request, Response }  from "express"
 import morgan from "morgan";
  import cors from "cors"
 // import { PORT } from "../config/Config"
 import  router from "./routes/index.routes"
 import path from "path"
  import sessions from "express-session"
- import cookieParse from "cookie-parser"
+ import cookieParser from "cookie-parser"
 
 async function Server() {
     
@@ -23,7 +23,7 @@ appServer.use(
     resave: false,
   })
 );
-
+     appServer?.use(cookieParser());
     appServer?.set( "views", path.join( __dirname, "views" ))
     appServer?.use(express.json() )
     appServer?.use(express.urlencoded({ extended: true }))
@@ -33,8 +33,8 @@ appServer.use(
        return res.status(404).json({message:"Esta ruta no existe"})
          
      })
-    appServer.listen(3009, (): String |any| Number => {
-        console.log("Conectado en el puerto:",3009);
+    appServer.listen(3000, (): String |any| Number => {
+        console.log("Conectado en el puerto:",3000);
         
     } )
        
