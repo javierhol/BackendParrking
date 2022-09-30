@@ -18,19 +18,18 @@
 
   export interface estacionamiento {
     idEstacio?: Number;
-    idVehi?: Number;
-    idUser?: Number;
-    horaEntrada?: String;
-    horaSalida?: String;
-    numeroAsignado?: Number;
+    idUser2?: Number;
+    hora_llegada?: String;
+    hora_salida?: String;
+    numero_asignado?: Number;
 
   }
 
   export interface vehiculo{
     idVehi?: Number;
     idEstacio1?: Number;
-    placa?:Number;
-    tipoVehiculo?: String;
+    placa?: String;
+    tipo_vehiculo?: String;
   }
 
   export interface tipoVehiculo{

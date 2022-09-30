@@ -3,9 +3,9 @@ import { conexion } from "../database"
 import { Admin } from "../interface/user.interface"
 import {AdminData} from "../class/AdminUser"
 import session, { Session } from "express-session";
+import {estacionamiento, vehiculo} from "../interface/user.interface"
 class ControllersAdmin {
     public async Signup( req: Request, res: Response ): Promise<any>{
-        
         
         try {
             const { id, nombre, documento, telefono, correo } = req.body;
@@ -34,7 +34,8 @@ class ControllersAdmin {
                 
                 if (passDocument == req.body.documento) {
                   
-                    let sessions;
+                  let sessions;
+                  
                     sessions = req?.session!
                     sessions.idUser = rows[0].idAdmin;
                   return   res.send("Autenticado");
@@ -46,25 +47,48 @@ class ControllersAdmin {
                 }
         })
     }
-public async parkingPost( req: Request, res: Response ): Promise<any> {
+  public async parkingPost( req: Request, res: Response ): Promise<any> {
+    const postData:estacionamiento = req.body;
         const connectDb = await conexion.connect();
-        connectDb.query("SELECT  documento, idAdmin FROM admin WHERE documento = ? ",
-        [req.body.documento], async (error, rows) => {
-              
-              if (rows ) {
-                const passDocument = await rows[0].documento; 
-                
-                if (passDocument == req.body.documento) {
+        connectDb.query("INSERT INTO estacionamiento SET ? ",[postData],
+         async (error, rows) => {
+             
+           if ( rows ) {
                   
-                    let sessions;
-                    sessions = req?.session!
-                    sessions.idUser = rows[0].idAdmin;
-                  return   res.send("Autenticado");
-                    
-                }else{
-                  return res.send("no autenticado");
-                    
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
                 }
+        })
+  }
+   public async parkingvehiculo( req: Request, res: Response ): Promise<any> {
+    const postData:vehiculo = req.body;
+        const connectDb = await conexion.connect();
+        connectDb.query("INSERT INTO vehiculo SET ? ",[postData],
+         async (error, rows) => {
+             
+           if ( rows ) {
+                  
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
+                }
+        })
+  }
+     public async factura( req: Request, res: Response ): Promise<any> {
+    const postData:vehiculo = req.body;
+        const connectDb = await conexion.connect();
+        connectDb.query("INSERT INTO factura SET ? ",[req.body],
+         async (error, rows) => {
+             
+           if ( rows ) {
+                  
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
                 }
         })
     }

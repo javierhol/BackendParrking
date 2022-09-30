@@ -16,7 +16,7 @@ export async function getUsers(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
   const newUser: Users = req.body;
-  console.log(newUser);
+  
   const conn = await conexion.connect();
   await conn.query("INSERT INTO users SET ?", [newUser], (error, rows) => {
     if (rows) {
