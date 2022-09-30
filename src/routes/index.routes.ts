@@ -20,9 +20,11 @@ router.post("/adminpost",controllersAdmin.Signup)
 router.post( "/login", controllersAdmin.signup )
 // Estacionamiento
 router.get("/parkingLot")
-router.post("/parkingLot")
+router.post("/parkingLot", controllersAdmin.parkingPost)
 router.delete("/parkingLot")
 router.put("/parkingLot")
 router.get("/parkingLot/:id")
+router.post("/postvehiculo", controllersAdmin.parkingvehiculo)
+router.post("/factura", controllersAdmin.factura)
 
 export default router;
