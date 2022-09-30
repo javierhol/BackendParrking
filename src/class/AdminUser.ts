@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { conexion } from "../database"
 import {Admin} from "../interface/user.interface"
-export class AdminData{
+export  class AdminData{
 
     private id: Number=0;
     public nombre: String = "";
@@ -17,7 +17,9 @@ export class AdminData{
         this.telefono = telefono;
         this.correo = correo
     }
-    public async SigupData() {
+   
+    
+    protected  async SigupData():Promise<any> {
        const connectDb = await conexion.connect();
             connectDb.query("INSERT INTO admin(idAdmin, nombre, documento, telefono, correo) VALUES (?, ?, ?, ?, ?)",
                 [this.id, this.nombre,  this.documento, this.telefono, this.correo], (error, rows) => {

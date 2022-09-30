@@ -3,15 +3,19 @@ import { conexion } from "../database"
 import { Admin } from "../interface/user.interface"
 import {AdminData} from "../class/AdminUser"
 import session, { Session } from "express-session";
-class ControllersAdmin {
-    public async Signup( req: Request, res: Response ): Promise<any>{
-        
+ class ControllersAdmin extends AdminData  {
+  constructor(){
+
+    super(0,"",0,0,"")
+  }
+   
+    public async Signup( req: Request, res: Response ): Promise<any>{     
         
         try {
             const { id, nombre, documento, telefono, correo } = req.body;
             console.log( req.body );
             const result =  new AdminData( id, nombre, documento, telefono, correo );
-            const post = await result.SigupData()
+            const post = await this.SigupData()
             if ( result.nombre ) {
                 res.json({message: "Datos registrados"})
                 
@@ -46,9 +50,6 @@ class ControllersAdmin {
                   return res.send("no autenticado");
                     
                 }
-              
-    
-                  return res.send("LOGIN");
                 }
 
             
