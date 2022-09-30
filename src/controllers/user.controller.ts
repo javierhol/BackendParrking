@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { conexion } from "../database";
 
-import { Users } from "../interface/user.interface";
+import { Users,typeVehicle, factura} from "../interface/user.interface";
 
 export async function getUsers(req: Request, res: Response) {
   const conn = await conexion.connect();
@@ -16,7 +16,28 @@ export async function getUsers(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
   const newUser: Users = req.body;
+<<<<<<< HEAD
   console.log(newUser);
+  let sessions;
+  sessions = req?.session!;
+  if (sessions.idUser) {
+    const conn = await conexion.connect();
+    await conn.query("INSERT INTO users SET ?", [newUser], (error, rows) => {
+      if (rows) {
+        res.json({
+          message: "User created",
+        });
+      } else {
+        res.json({ message: error });
+      }
+    });
+  }else{
+    res.send({ message:"No se ha iniciado sesion" })
+  }
+
+
+=======
+  
   const conn = await conexion.connect();
   await conn.query("INSERT INTO users SET ?", [newUser], (error, rows) => {
     if (rows) {
@@ -27,6 +48,7 @@ export async function createUser(req: Request, res: Response) {
       res.json({ message: error });
     }
   });
+>>>>>>> 59b974f29309e2763880f6fcc1bf421b5954d8ae
 }
 
 export async function getUser(req: Request, res: Response): Promise<any> {
@@ -37,6 +59,32 @@ export async function getUser(req: Request, res: Response): Promise<any> {
       return res.json(rows);
     } else {
       return res.json(error);
+    }
+  });
+}
+
+export async function tipoVehiculo(req: Request, res: Response){
+  const newTypeVehicle: typeVehicle = req.body;
+  const conn = await conexion.connect();
+    await conn.query("INSERT INTO tipo_vehiculo SET ?", [newTypeVehicle], (error, rows) => {
+      if (rows) {
+        res.json({
+          message: "Vehiculo creado",
+        });
+      } else {
+        res.json({ message: error });
+      }
+    });
+}
+
+
+export async function factura(req: Request, res: Response){
+  const conn = await conexion.connect();
+  conn.query("SELECT * FROM factura", (error, rows) => {
+    if (rows) {
+      res.send(rows);
+    } else {
+      res.send(error);
     }
   });
 }

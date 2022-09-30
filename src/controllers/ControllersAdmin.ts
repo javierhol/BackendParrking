@@ -3,6 +3,7 @@ import { conexion } from "../database"
 import { Admin } from "../interface/user.interface"
 import {AdminData} from "../class/AdminUser"
 import session, { Session } from "express-session";
+import {estacionamiento, vehiculo} from "../interface/user.interface"
  class ControllersAdmin extends AdminData  {
   constructor(){
 
@@ -38,27 +39,64 @@ import session, { Session } from "express-session";
                 
                 if (passDocument == req.body.documento) {
                   
-                    let sessions;
+                  let sessions;
+                  
                     sessions = req?.session!
                     sessions.idUser = rows[0].idAdmin;
-                    console.log(sessions);
-                    
                   return   res.send("Autenticado");
-                    
                     
                 }else{
                   return res.send("no autenticado");
                     
                 }
                 }
-
-            
-
-                
-            
         })
     }
-
+  public async parkingPost( req: Request, res: Response ): Promise<any> {
+    const postData:estacionamiento = req.body;
+        const connectDb = await conexion.connect();
+        connectDb.query("INSERT INTO estacionamiento SET ? ",[postData],
+         async (error, rows) => {
+             
+           if ( rows ) {
+                  
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
+                }
+        })
+  }
+   public async parkingvehiculo( req: Request, res: Response ): Promise<any> {
+    const postData:vehiculo = req.body;
+        const connectDb = await conexion.connect();
+        connectDb.query("INSERT INTO vehiculo SET ? ",[postData],
+         async (error, rows) => {
+             
+           if ( rows ) {
+                  
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
+                }
+        })
+  }
+     public async factura( req: Request, res: Response ): Promise<any> {
+    const postData:vehiculo = req.body;
+        const connectDb = await conexion.connect();
+        connectDb.query("INSERT INTO factura SET ? ",[req.body],
+         async (error, rows) => {
+             
+           if ( rows ) {
+                  
+             res.json( { info:"Los datos fueron registrados",message:rows})
+           } else {
+             
+             res.json( { info:"Los datos no se acrualizaron",message:error})
+                }
+        })
+    }
 }
 
 export const controllersAdmin = new ControllersAdmin();
