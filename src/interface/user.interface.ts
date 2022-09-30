@@ -33,10 +33,15 @@
     tipoVehiculo?: String;
   }
 
-  export interface tipoVehiculo{
-    idVehi?: Number;
+  export interface typeVehicle{
+    idvehi?: Number;
     idEstacio2?: Number;
     descripcion?:String;
-    valor?: Number;
+    valor?: Number; 
+  }
 
+  export interface factura{
+    idVehi3?: Number;
+    idEstacio3?: Number;
+    valor?: Number;
   }
